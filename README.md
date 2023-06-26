@@ -1,7 +1,7 @@
 # EncryptEra - Demo for ANZ Hackfest 2023
 
-# Use package requirements using
-# > pip install -r requirements
+Use package requirements using
+> pip install -r requirements
 
-# Run the tool using
-# > python encrypt_era.py
+Run the tool using
+> python encrypt_era.py
