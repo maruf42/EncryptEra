@@ -1,4 +1,3 @@
-import threading
 import PySimpleGUI as sg
 from openai_connector import query_chatgpt
 from settings import PROMPTS
