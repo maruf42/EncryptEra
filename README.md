@@ -1,4 +1,4 @@
-# EncryptEra - Demo
+# EncryptEra - Demo for ANZ Hackfest 2023
 
 # Use package requirements using
 # > pip install -r requirements
