@@ -18,7 +18,7 @@ def query_chatgpt(prompt):
         'Content-Length': str(len(prompt)),
     }
 
-    response = requests.post(OPENAI_URL, params=params, headers=headers, json=payload, proxies=proxies, verify=False)
+    response = requests.post(OPENAI_URL, params=params, headers=headers, json=payload, proxies=proxies)
     response = response.json()
 
     return response['choices'][0]['message']['content']
