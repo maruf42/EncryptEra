@@ -6,7 +6,8 @@ from settings import PROMPTS
 sg.theme('SystemDefaultForReal')
 layout = [ [sg.Text('Source File'),
             sg.In(size=(53, 1), enable_events=True, key='file'),
-            sg.FileBrowse(initial_folder='.', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
+            sg.FileBrowse(initial_folder='.', key='browse_in', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), )),
+            sg.Button('Load', size=(10, 1))
            ],
            [sg.Frame('Protection Options', [[
             sg.Radio('Pseudo-names', group_id='options', key='psudo-name', default=True),
@@ -18,13 +19,13 @@ layout = [ [sg.Text('Source File'),
            [sg.Text(' ', expand_x=True, key='meh1', justification='center'),
             sg.Text('Secured File'),
             sg.In(size=(51, 1), enable_events=True, key='output_file'),
-            sg.FileSaveAs(initial_folder='.', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
+            sg.FileSaveAs(initial_folder='.', key='browse_out', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
            [sg.Text(' ', expand_x=True, key='meh2', justification='center'),
-            sg.Button('De-identify'),
-            sg.Button('    Save    '),
-            sg.Button('    Clear   '),
-            sg.Button('    Exit    ')
+            sg.Button('De-identify', size=(10, 1)),
+            sg.Button('Save', size=(10, 1)),
+            sg.Button('Clear', size=(10, 1)),
+            sg.Button('Exit', size=(10, 1))
            ]
          ]
 
@@ -34,9 +35,9 @@ window = sg.Window('EncryptEra Information Protector - DEMO', layout)
 # Create an event loop
 while True:
     event, values = window.read()
-    if event == '    Exit    ' or event == sg.WIN_CLOSED:
+    if event in ('Exit', sg.WIN_CLOSED):
         break
-    elif event == 'file':
+    elif event in ('file', 'Load'):
         try:
             with open(values['file'], 'r', encoding='UTF-8') as f:
                 file = f.read()
@@ -59,12 +60,12 @@ while True:
             window['output'].update(response_text)
         except Exception as e:
             sg.popup_ok(e, title='Proxy Error')
-    elif event == '    Clear   ':
+    elif event == 'Clear':
         window['file'].update('')
         window['source'].update('')
         window['output'].update('')
         window['output_file'].update('')
-    elif event == '    Save    ':
+    elif event in ('output_file', 'Save'):
         if values['output'].strip() == '':
             sg.popup_ok('Nothing to save!', title='Content Error')
             continue
