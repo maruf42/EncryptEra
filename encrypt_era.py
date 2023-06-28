@@ -5,9 +5,8 @@ from settings import PROMPTS
 
 sg.theme('SystemDefaultForReal')
 layout = [ [sg.Text('Source File'),
-            sg.In(size=(53, 1), enable_events=True, key='file'),
-            sg.FileBrowse(initial_folder='.', key='browse_in', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), )),
-            sg.Button('Load', size=(10, 1))
+            sg.In(size=(53, 1),  key='file', enable_events=True, disabled=True),
+            sg.FileBrowse(initial_folder='.', key='browse_in', target='file', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
            [sg.Frame('Protection Options', [[
             sg.Radio('Pseudo-names', group_id='options', key='psudo-name', default=True),
@@ -18,12 +17,11 @@ layout = [ [sg.Text('Source File'),
            ],
            [sg.Text(' ', expand_x=True, key='meh1', justification='center'),
             sg.Text('Secured File'),
-            sg.In(size=(51, 1), enable_events=True, key='output_file'),
-            sg.FileSaveAs(initial_folder='.', key='browse_out', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
+            sg.In(size=(51, 1), key='output_file', enable_events=True, disabled=True),
+            sg.FileSaveAs(initial_folder='.', key='browse_out', target='output_file', default_extension='.txt', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
            [sg.Text(' ', expand_x=True, key='meh2', justification='center'),
             sg.Button('De-identify', size=(10, 1)),
-            sg.Button('Save', size=(10, 1)),
             sg.Button('Clear', size=(10, 1)),
             sg.Button('Exit', size=(10, 1))
            ]
@@ -37,7 +35,7 @@ while True:
     event, values = window.read()
     if event in ('Exit', sg.WIN_CLOSED):
         break
-    elif event in ('file', 'Load'):
+    elif event == 'file':
         try:
             with open(values['file'], 'r', encoding='UTF-8') as f:
                 file = f.read()
@@ -65,7 +63,7 @@ while True:
         window['source'].update('')
         window['output'].update('')
         window['output_file'].update('')
-    elif event in ('output_file', 'Save'):
+    elif event == 'output_file':
         if values['output'].strip() == '':
             sg.popup_ok('Nothing to save!', title='Content Error')
             continue
