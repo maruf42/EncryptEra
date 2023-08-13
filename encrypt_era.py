@@ -8,9 +8,13 @@ layout = [ [sg.Text('Source File'),
             sg.In(size=(53, 1),  key='file', enable_events=True, disabled=True),
             sg.FileBrowse(initial_folder='.', key='browse_in', target='file', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
-           [sg.Frame('Protection Options', [[
-            sg.Radio('Pseudo-names', group_id='options', key='psudo-name', default=True),
-            sg.Radio('Masked', group_id='options', key='mask')]])
+           [sg.Frame('Operations', [[
+            sg.Frame('Protection Options', [[
+                sg.Radio('Masked', group_id='options', key='mask'),
+                sg.Radio('Pseudo-names', group_id='options', key='psudo-name', default=True),
+            ]]),
+            sg.Radio('Information Extraction', group_id='options', key='ie'),
+           ]])
            ],
            [sg.Frame('Source Text', [[sg.Multiline(size=(70, 25), key='source')]]),
             sg.Frame('Secured Text', [[sg.Multiline(size=(70, 25), key='output')]])
@@ -21,7 +25,7 @@ layout = [ [sg.Text('Source File'),
             sg.FileSaveAs(initial_folder='.', key='browse_out', target='output_file', default_extension='.txt', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
            [sg.Text(' ', expand_x=True, key='meh2', justification='center'),
-            sg.Button('De-identify', size=(10, 1)),
+            sg.Button('Execute', size=(10, 1)),
             sg.Button('Clear', size=(10, 1)),
             sg.Button('Exit', size=(10, 1))
            ]
@@ -43,14 +47,16 @@ while True:
             window['source'].update(file)
         except Exception as e:
             sg.popup_ok(e, title='File Read Error')
-    elif event == 'De-identify':
+    elif event == 'Execute':
         if values['source'].strip() == '':
-            sg.popup_ok('No text is loaded to de-identify!', title='No Text')
+            sg.popup_ok('No text is loaded to process!', title='No Text')
             continue
         if values['psudo-name']:
             prompt = PROMPTS[0] + '\n' + values['source']
         elif values['mask']:
             prompt = PROMPTS[1] + '\n' + values['source']
+        elif values['ie']:
+            prompt = PROMPTS[2] + '\n' + values['source']
 
         sg.popup_auto_close('Please wait...', non_blocking=True, no_titlebar=True, button_type=sg.POPUP_BUTTONS_NO_BUTTONS)
         try:
