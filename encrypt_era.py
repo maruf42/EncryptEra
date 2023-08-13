@@ -51,9 +51,9 @@ while True:
         if values['source'].strip() == '':
             sg.popup_ok('No text is loaded to process!', title='No Text')
             continue
-        if values['psudo-name']:
+        if values['mask']:
             prompt = PROMPTS[0] + '\n' + values['source']
-        elif values['mask']:
+        elif values['psudo-name']:
             prompt = PROMPTS[1] + '\n' + values['source']
         elif values['ie']:
             prompt = PROMPTS[2] + '\n' + values['source']
