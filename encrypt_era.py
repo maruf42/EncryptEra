@@ -9,9 +9,9 @@ layout = [ [sg.Text('Source File'),
             sg.FileBrowse(initial_folder='.', key='browse_in', target='file', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
            [sg.Frame('Operations', [[
-            sg.Frame('Protection Options', [[
-                sg.Radio('Masked', group_id='options', key='mask'),
-                sg.Radio('Pseudo-names', group_id='options', key='psudo-name', default=True),
+            sg.Frame('Anonymise Options', [[
+                sg.Radio('Masked', group_id='options', key='mask', default=True),
+                sg.Radio('Pseudo-names', group_id='options', key='psudo-name'),
             ]]),
             sg.Radio('Information Extraction', group_id='options', key='ie'),
            ]])
