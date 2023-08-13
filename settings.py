@@ -9,4 +9,5 @@ PROXY_URL = 'http://127.0.0.1:9000/'
 PROMPTS = [
     'Alter all the sensitive information form the below text using real sounding psudo-names. Replace all names, address, email, phone/fax numbers, identifiers, dates, times, dollar amounts:',
     'Alter all the sensitive information form the below text by replacing them with XXX. Use the same number of X as the length of the original text. Replace all names, address, email, phone/fax numbers, identifiers, dates, times, dollar amounts:',
+    'Extract all the sensitive information from the below text and associate them with the type of information:'
 ]
