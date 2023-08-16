@@ -16,15 +16,15 @@ layout = [ [sg.Text('Source File'),
             sg.Radio('Information Extraction', group_id='options', key='ie'),
            ]])
            ],
-           [sg.Frame('Source Text', [[sg.Multiline(size=(70, 25), key='source')]]),
-            sg.Frame('Secured Text', [[sg.Multiline(size=(70, 25), key='output')]])
+           [sg.Frame('Source Text', [[sg.Multiline(size=(100, 45), key='source')]]),
+            sg.Frame('Converted Text', [[sg.Multiline(size=(100, 45), key='output')]])
            ],
-           [sg.Text(' ', expand_x=True, key='meh1', justification='center'),
+           [sg.Push(),
             sg.Text('Secured File'),
             sg.In(size=(51, 1), key='output_file', enable_events=True, disabled=True),
             sg.FileSaveAs(initial_folder='.', key='browse_out', target='output_file', default_extension='.txt', file_types=(('Text files', '*.txt'), ('Markup documents', '.md'), ))
            ],
-           [sg.Text(' ', expand_x=True, key='meh2', justification='center'),
+           [sg.Push(),
             sg.Button('Execute', size=(10, 1)),
             sg.Button('Clear', size=(10, 1)),
             sg.Button('Exit', size=(10, 1))
