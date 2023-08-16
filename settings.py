@@ -1,4 +1,4 @@
-OPENAI_API_KEY = '70d773eddedf4b16830fd49b3d610a5f'
+OPENAI_API_KEY = ''
 OPENAI_HOST = 'ao-wl-eus-anzx.openai.azure.com'
 OPENAI_PATH = '/openai/deployments/CTOTest/chat/completions'
 OPENAI_URL = 'https://' + OPENAI_HOST + OPENAI_PATH
